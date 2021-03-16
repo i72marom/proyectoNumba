@@ -1,7 +1,7 @@
 import numpy
 import numba
 from time import time
-import algoritmos as a
+from algoritmos import *
 import random
 
 def escribeFichero(lista, nombre):
@@ -13,41 +13,48 @@ def escribeFichero(lista, nombre):
 	f.close()
 
 def imprimeAyuda():
-	ayuda_ = "Opciones: \n\t0. Salir. \n\t1. Ayuda. \n\t2. Determinante iterativo\n"
+	ayuda_ = "Opciones: \n\t0. Salir. \n\t1. Ayuda. \n\t2. Determinante iterativo.\n\t3. Determinante recursivo.\n"
 	print(ayuda_)
 
 def menu():
-	menu_ = {'1':imprimeAyuda, '2':calcDeterminante}
+	menu_ = {'2', '3'}
 	option = input("test> ")
 
-	f = menu_.get(option, None)
-	if f:
-		f()
- 
-	return option == "0"
+	if option == "1": imprimeAyuda()
+	elif option in menu_: calcularTiempos(option)
+	else: return option == "0"
 
 @numba.jit
 def rellenaMatriz(x):
 	return numpy.random.uniform(-10.0, 10.0, size=(x,x));
 
-def calcDeterminante():
-	interprete_ = []
-	numba_      = []
+def calcularTiempos(option):
+	alg_iterativos_ = {'2':determinanteIter, '3':detRecursivo}
+	alg_numba_      = {'2':determinanteIterNumba, '3':detRecursivoNumba}
+	datos     = []
 
-	for x in range(90,501,10):
-		m = rellenaMatriz(x)
+	f1 = alg_iterativos_.get(option, None)
+	f2 = alg_numba_.get(option, None)
+	if f1 and f2:
+		max_ = input("Numero maximo de elementos: ")
+		min_ = input("Numero minimo de elementos: ")
+		i = input("Intervalo: ")
 
-		print(x, "elementos.")
+		for x in range(min_,max_,i):
+			m = rellenaMatriz(x)
 
-		# Interprete
-		start_time   = time()
-		a.determinante(m, x)
-		interprete_.append(time() - start_time)
+			print(x, "elementos.")
 
-		# Numba
-		start_time   = time()
-		a.determinanteNumba(m, x)
-		numba_.append(time() - start_time)
+			# interprete
+			start_time = time()
+			f1(m, x)
+			tiempo_int = time() - start_time
 
-	escribeFichero(interprete_, "determinante_interprete")
-	escribeFichero(numba_, "determinante_numba")
+			#numba
+			start_time = time()
+			f2(m, x)
+			tiempo_numba = time() - start_time
+
+			datos.append([x, tiempo_int, tiempo_numba])
+
+#	escribeFichero(interprete_, str(f))
