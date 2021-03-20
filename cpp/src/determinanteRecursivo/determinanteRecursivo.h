@@ -7,38 +7,6 @@
  * Inicia el proceso para ajustar la función polinomica del determinante iterativo.
  */
 void determinanteRecursivo();
-
-/**
- * Se ajustará un polinomio de grado 3. 
- * @param n             Vector con los distintos ordenes de la matriz.
- * @param tiemposReales Vector con los tiempos reales de cálculo de determinante.
- * @param a             Vector de coeficientes del polinomio de ajuste.
- */
-void ajusteRecursivo(
-	const vector <double> &n,
-	const vector <double> &tiemposReales,
-	vector <double> &a
-);
-
-/**
- * Calcula los valores estimados para los distintos valores del vector n.
- * @param n                Vector con los distintos ordenes de la matriz.
- * @param a                Vector de coeficientes del polinomio de ajuste.
- * @param tiemposEstimados Vector que almacenará los tiempo que se obtengan en la estimación.
- */
-void calcularTiemposEstimadosRecursivo(
-	const vector <double> &n, 
-	const vector <double> &a, 
-	vector <double> &tiemposEstimados
-);
-
-/**
- * Calcula el tiempo estimado para obterner el determinante de una matriz de orden n.
- * @param n Orden de la matriz a estimar
- * @param a Vector de coeficientes del polinomio de ajuste.
- */
-double calcularTiempoEstimadoRecursivo(const double &n, const vector<double> &a);
-
 /**
  * Ejecuta el algoritmo de ordenación para cada uno de los tamaños de vector y calcula el tiempo medio para las repeticiones.
  * @param min           Tamaño mínimo del vector.
