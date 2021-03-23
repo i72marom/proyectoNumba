@@ -1,7 +1,5 @@
-import numpy
-import numba
-from time import time
 from algoritmos import *
+from time import time
 import random
 import os.path as p
 
