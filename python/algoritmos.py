@@ -148,7 +148,7 @@ def productoMatriz(A, B):
  * m: Matriz de orden n
  * n: orden de la matriz
 """
-def exponenteMatriz(m, n, exp = 30)):
+def exponenteMatriz(m, n, exp = 30):
 	exp = 30
 	resultado = numpy.zeros((n,n))
 

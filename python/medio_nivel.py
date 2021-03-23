@@ -3,13 +3,25 @@ import numba
 from time import time
 from algoritmos import *
 import random
+import os.path as p
+
+def preguntaGuardar(lista):
+	option = input("Pulsa s para guardar: ")
+
+	if option.lower() == "s":
+		path = input("Nombre del archivo (se guarda en txt/): ")
+		if p.isfile("txt/" + path + ".txt"): 
+			option = input("txt/" + path + ".txt ya existe. Pulsa s para sobreescribir: ")
+		
+		if option.lower() == "s": 
+			escribeFichero(lista, path)
+			print("Guardando...")
+
 
 def escribeFichero(lista, nombre):
 	f = open("txt/" + nombre + ".txt", "w")
 	
-	# primera columna = numero de elementos
-	# segunda colunna = tiempo interprete
-	# tercera colunna = tiempo numba
+	# numero de elementos, tiempo interprete, tiempo numba
 	for i in lista: 
 		f.write(str(i[0]) + " "+ str('{:,.15f}'.format(i[1])) + " "+ str('{:,.15f}'.format(i[2])) + "\n")
 
@@ -61,4 +73,4 @@ def calcularTiempos(option):
 			print(x, "elementos.", "Interprete:", '{:,.15f}'.format(tiempo_int), "segundos. Numba:", '{:,.15f}'.format(tiempo_numba), "segundos.")
 			datos.append([x, tiempo_int, tiempo_numba])
 
-	escribeFichero(datos, n)
+	preguntaGuardar(datos)
