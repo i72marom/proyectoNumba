@@ -44,12 +44,11 @@ def rellenaMatriz(x):
 def calcularTiempos(option):
 	alg_iterativos_ = {'2':determinanteIter, '3':detRecursivo, '4':exponenteMatriz}
 	alg_numba_      = {'2':determinanteIterNumba, '3':detRecursivoNumba, '4':exponenteMatrizNumba}
-	nombre			= {'2':"determinante_iterativo", '3':"determinante_recursivo", '4':"exponente_matriz"}
 	datos           = []
 
 	f1 = alg_iterativos_.get(option, None)
 	f2 = alg_numba_.get(option, None)
-	n = nombre.get(option, None)
+
 	if f1 and f2:
 		min_ = int(input("Numero minimo de elementos: "))
 		max_ = int(input("Numero maximo de elementos: "))
